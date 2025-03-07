@@ -3,13 +3,14 @@ import ast
 
 
 savable = pd.read_csv("savable.csv", encoding='utf-8')
+altmetric = pd.read_csv("Altmetric.csv", encoding='utf-8')
 '''
-savable is the only file where the doi doesn't start with https://doi.org/, so merges on doi wouldn't work.
+altmetric is the only file where the doi doesn't start with https://doi.org/, so merges on doi wouldn't work.
 hence we add https://doi.org/ 
 '''
-savable['doi'].apply(lambda x: "https://doi.org/" + str(x) if x else x)
+altmetric['DOI'] = altmetric['DOI'].apply(lambda x: "https://doi.org/" + str(x) if x else x)
+print(altmetric['DOI'].head(5))
 
-altmetric = pd.read_csv("Altmetric.csv", encoding='utf-8')
 overton = pd.read_csv("overton_data.csv", encoding='utf-8')
 '''
 overton data has not been split into columns, so we have to do that here.
